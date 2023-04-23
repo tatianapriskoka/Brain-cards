@@ -1,4 +1,4 @@
-const API_URL = 'https://marmalade-scarce-coast.glitch.me/';
+const API_URL = 'https://yummy-chestnut-william.glitch.me';
 
 export const fetchCategories = async () => {
     try {
@@ -8,6 +8,9 @@ export const fetchCategories = async () => {
             const error = await response.json();
             throw error;
         }
+
+        const categories = await response.json();
+        return categories;
     } catch (error) {
         return { error };
     }
