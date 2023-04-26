@@ -71,18 +71,18 @@ export const createEditCategory = (app) => {
 
         const tableCellMain = createElement('td', {
             className: 'table__cell table__cell_one',
+            textContent: dataArr[0],
             contentEditable: true,
         });
 
         const tableCellSecond = createElement('td', {
             className: 'table__cell table__cell_two',
-            textContent: dataArr[0],
+            textContent: dataArr[1],
             contentEditable: true,
         });
 
         const tableCellDel = createElement('td', {
             className: 'table__cell',
-            textContent: dataArr[1],
         });
 
         const delRow = createElement('button', {
@@ -136,7 +136,8 @@ export const createEditCategory = (app) => {
         }
 
         const rows = data.pairs.map(createTRCell);
-        tbody.append(...rows);
+        const emptyRow = createTRCell(['', '']);
+        tbody.append(...rows, emptyRow);
 
         app.append(editCategory);
     };
@@ -145,5 +146,7 @@ export const createEditCategory = (app) => {
         editCategory.remove();
     };
 
-    return { mount, unmount }
+    return { mount, unmount };
 }
+
+
