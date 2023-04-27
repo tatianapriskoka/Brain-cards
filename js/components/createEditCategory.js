@@ -136,10 +136,18 @@ export const createEditCategory = (app) => {
             const textMain = cellsMain[i].textContent.trim();
             const textSecond = cellsSecond[i].textContent.trim();
             if (textMain && textSecond) {
-                data.pairs[i] = [textMain, textSecond];
+                data.pairs.push([textMain, textSecond]);
+            }
+
+            if (title.textContent.trim() && title.textContent !== TITLE) {
+                data.title = title.textContent.trim();
+            };
+
+            if (btnSave.dataset.id) {
+                data.id = btnSave.dataset.id;
             }
         };
-        console.log(data);
+
         return data;
     }
 
@@ -157,15 +165,17 @@ export const createEditCategory = (app) => {
         const emptyRow = createTRCell(['', '']);
         tbody.append(...rows, emptyRow);
 
+        btnSave.dataset.id = data.id ? data.id : '';
+
         app.append(editCategory);
-        parseData(); // удалить попозже
+
     };
 
     const unmount = () => {
         editCategory.remove();
     };
 
-    return { mount, unmount };
+    return { mount, unmount, parseData, btnSave, btnCancel };
 };
 
 
